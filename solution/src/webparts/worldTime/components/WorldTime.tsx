@@ -29,11 +29,16 @@ export default class WorldTime extends React.Component<IWorldTimeProps, {}> {
   }
 
   public render(): React.ReactElement<IWorldTimeProps> {
+    
+    var showClock = {
+      display: this.props.showClock ? "block" : "none"
+    };
+		
     return (
       <div className={styles.worldTime}>
         <div className={styles.container}>
           <div className={styles.description}>{(this.props.description) ? this.props.description : strings.LocalTimeDescription}</div>
-          <Clock timeZoneOffset={this.convertTimeZoneIdToOffset(this.props.timeZoneOffset)} />
+          <Clock showClock={showClock} timeZoneOffset={this.convertTimeZoneIdToOffset(this.props.timeZoneOffset)} />
         </div>
       </div>
     );

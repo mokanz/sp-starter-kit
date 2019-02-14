@@ -6,7 +6,8 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneDropdown,
-  IPropertyPaneDropdownOption
+  IPropertyPaneDropdownOption,
+  PropertyPaneToggle
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'WorldTimeWebPartStrings';
@@ -25,6 +26,7 @@ export default class WorldTimeWebPart extends BaseClientSideWebPart<IWorldTimeWe
       {
         description: this.properties.description,
         timeZoneOffset: this.properties.timeZoneOffset,
+        showClock: this.properties.showClock,
         errorHandler: (errorMessage: string) => {
           this.context.statusRenderer.renderError(this.domElement, errorMessage);
         }
@@ -64,6 +66,12 @@ export default class WorldTimeWebPart extends BaseClientSideWebPart<IWorldTimeWe
                 PropertyPaneDropdown('timeZoneOffset', {
                   label: strings.TimeZoneOffsetFieldLabel,
                   options: this.getTimeZones()
+                }),
+                PropertyPaneToggle('showClock', {
+                  label:'Show Clock?',
+                  onText:'Show',
+                  offText:"Don't show",
+                  checked: this.properties.showClock 
                 })
               ]
             }
